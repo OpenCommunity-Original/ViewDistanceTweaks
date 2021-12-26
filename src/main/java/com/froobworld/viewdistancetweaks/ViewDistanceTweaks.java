@@ -3,7 +3,6 @@ package com.froobworld.viewdistancetweaks;
 import com.froobworld.viewdistancetweaks.command.VdtCommand;
 import com.froobworld.viewdistancetweaks.config.VdtConfig;
 import com.froobworld.viewdistancetweaks.limiter.ClientViewDistanceManager;
-import com.froobworld.viewdistancetweaks.metrics.VdtMetrics;
 import com.froobworld.viewdistancetweaks.placeholder.VdtExpansion;
 import com.froobworld.viewdistancetweaks.util.*;
 import org.bukkit.Bukkit;
@@ -48,7 +47,6 @@ public class ViewDistanceTweaks extends JavaPlugin {
         taskManager = new TaskManager(this);
         taskManager.init();
         registerCommands();
-        initMetrics();
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             if (new VdtExpansion(this).register()) {
@@ -72,10 +70,6 @@ public class ViewDistanceTweaks extends JavaPlugin {
         getCommand("vdt").setExecutor(vdtCommand);
         getCommand("vdt").setPermission(VdtCommand.PERMISSION);
         getCommand("vdt").setTabCompleter(vdtCommand.getTabCompleter());
-    }
-
-    private void initMetrics() {
-        new VdtMetrics(this);
     }
 
     public ClientViewDistanceManager getClientViewDistanceManager() {

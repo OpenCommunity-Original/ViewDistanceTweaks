@@ -1,25 +1,22 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id "com.github.johnrengelman.shadow" version "7.1.1"
     id 'java'
 }
 
 group 'com.froobworld'
 version '1.4.0'
 jar.enabled = false;
-
-sourceCompatibility = 1.8
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenLocal();
     mavenCentral()
     maven {
-        url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+        url = uri("https://papermc.io/repo/repository/maven-public/")
     }
     maven {
         url "https://oss.sonatype.org/content/groups/public/"
-    }
-    maven {
-        url "https://papermc.io/repo/repository/maven-public/"
     }
     maven {
         url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
@@ -27,12 +24,10 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    compileOnly 'com.destroystokyo.paper:paper-api:1.15.2-R0.1-SNAPSHOT'
+    compileOnly "io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT"
     compileOnly 'me.clip:placeholderapi:2.10.9'
-    compile 'org.jooq:joor-java-8:0.9.13'
-    compile 'com.froobworld:nab-configuration:1.0.2'
-    compile 'org.bstats:bstats-bukkit:2.2.1'
+    compileClasspath 'com.froobworld:nab-configuration:1.0.2'
+    compileClasspath 'org.jooq:joor-java-8:0.9.14'
 }
 
 processResources {
@@ -44,7 +39,6 @@ shadowJar {
 
     relocate 'com.froobworld.nabconfiguration', 'com.froobworld.viewdistancetweaks.lib.nabconfiguration'
     relocate 'org.joor', 'com.froobworld.viewdistancetweaks.lib.joor'
-    relocate 'org.bstats', 'com.froobworld.viewdistancetweaks.lib.bstats'
 }
 
 artifacts {
